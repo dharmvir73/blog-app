@@ -1,0 +1,171 @@
+
+.navbar-wrapper{
+    height : 100px;
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.right{
+    margin-right: 0;
+}
+
+.left{
+    margin-left:0;
+}
+
+.burger-menu{
+    display:none;
+}
+
+.right button{
+    display:flex;
+    outline: none;
+    height: fit-content;
+    margin-right: 8vw;
+    padding: 11px 20px;
+    border: 3px solid grey;
+    background-color: white;
+    border-radius: 18px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: bolder;
+}
+
+.right button:hover{
+    background-color: lightgrey;
+    
+}
+
+.user-info{
+    display:flex;
+    align-items: center;
+}
+
+.user-info p{
+margin-right: 0.5rem;
+font-size: 0.8rem
+}
+.user-info img{
+    border-radius: 50px;
+    background-size: auto;
+}
+
+.rekt{
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    height: fit-content;
+    border: 3px solid lightblue;
+    border-radius: 20px;
+    margin-right: 1rem;
+    padding: 5px 10px;
+    font-weight: bolder;
+}
+
+.dashboard{
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    height: fit-content;
+    border: 3px solid lightblue;
+    border-radius: 20px;
+    margin-right: 1rem;
+    padding: 13px 10px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: bolder;
+    text-decoration: none;
+    color: black;
+}
+
+.dashboard:hover{
+    background-color: lightgrey;
+}
+
+.logo{
+    width: 150px;
+    margin-left: 8vw;
+}
+.menu-container{
+    margin-left: -100%;
+    margin-top: -30px;
+    z-index: 1;
+    overflow:hidden;
+    animation-name: load;
+    animation-duration: 1s;
+    transition: ease-in-out; 
+}
+
+@keyframes load{
+    0%{
+        width: 0vw;
+    }
+    100%{
+        width: 100vw;
+    }
+}
+
+@media(max-width:475px){
+
+    .logo{
+        width: 90px;
+        margin-top: 5px;
+    }
+    .dashboard{
+       display:none;
+    }
+    .rekt{
+        display:none;
+    }
+    .user-info p{
+        display: none;
+        }
+        .user-info img{
+            display:none;
+        }
+    
+    .right button{
+        display:none;
+    }
+    .navbar-wrapper{
+        width: 100%;
+    }
+    .burger-menu{
+        display: inline;
+        width:30px;
+        margin-right: 8vw;
+        cursor: pointer;
+    }
+    .navbar-wrapper{
+        height:50px;
+    }
+}
+
+.close-btn{
+    font-size:2rem;
+    padding:1rem;
+    margin-right:0px;
+    color:white;
+}
+
+.profile-wrapper{
+    width:38vw;
+    margin-left: 0;
+    padding-left: 1rem;
+}
+
+.user-picture{
+    display: flex;
+    align-items: center;
+}
+
+.username{
+    color: #fff;
+    font-weight: bold;
+    font-size: small;
+}
+
+.picture img{
+    border-radius: 20px;
+}

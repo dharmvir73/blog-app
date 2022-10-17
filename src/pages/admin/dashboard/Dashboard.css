@@ -1,0 +1,110 @@
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani&display=swap');
+
+
+*{
+    margin: 0 auto;
+    padding: 0;
+}
+
+
+.dash-wrapper h2{
+    text-align: center;
+    margin-bottom: 2%;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 2rem;
+}
+
+.dash-wrapper form{
+ display: flex;
+ flex-direction: column;
+}
+
+
+.description{
+    margin-bottom: 2%;
+    background-color: #E5DDF5;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    box-shadow: 5px 5px 18px -10px black;
+    width: 30rem;
+    height: 5rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    padding-top: 1rem;
+    resize: none;
+}
+
+.input-primary{
+    margin-bottom: 2%;
+    background-color: #E5DDF5;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    box-shadow: 5px 5px 18px -10px black;
+    width: 30rem;
+    height: 2.5rem;
+    padding-left: 1.5rem;
+}
+
+.btn-upload{
+    margin-bottom: 2%;
+    background-color: #E5DDF5;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    box-shadow: 5px 5px 18px -10px black;
+    width: 8rem;
+    height: 2rem;
+    color: grey;
+    font-weight: bold;
+    cursor: pointer;
+}
+.btn-upload:hover{
+    background-color: #ffffff;
+}
+
+.custom-file{
+    display:flex;
+    margin-bottom: 2%;
+    align-items: center;
+    justify-content: center;
+    background-color: #E5DDF5;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    box-shadow: 5px 5px 18px -10px black;
+    width: 8rem;
+    height: 2rem;
+    color: grey;
+    cursor: pointer;
+}
+
+
+.file-wrapper {
+    display:flex;
+    justify-content:space-between;
+    width: 25rem;
+    margin-bottom: 1%;
+}
+
+.text-area {
+    outline:none;
+    width: 30rem;
+    height: 20rem;
+    resize:none;
+    background-color: #E5DDF5;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    box-shadow: 5px 5px 18px -10px black;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    padding-top: 1rem;
+    margin-bottom: 2%;
+}
+
+.post-btn-wrapper{
+    display:flex;
+    justify-self: center;
+}
