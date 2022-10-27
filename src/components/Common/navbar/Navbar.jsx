@@ -37,7 +37,14 @@ const Navbar = ({type}) => {
     const handleMenu = () => {
         setOpen(!open);
     }
-   
+    
+    const [openMenu, setOpenMenu] = useState(false)
+
+    const toggleMenu = () => {
+        setOpenMenu(!openMenu);
+    }
+    
+
 
     return ( 
         <div className="navbar-wrapper">
@@ -45,8 +52,7 @@ const Navbar = ({type}) => {
                 <img src={Logo} alt="Logo" className="logo"/>
             </div>
             <div className="right">
-               
-                {
+                    {
                     open === false ? 
                     <>
                      <img onClick={handleMenu} className="burger-menu" src={Burger} alt=""/>
@@ -75,7 +81,9 @@ const Navbar = ({type}) => {
                  
                     </>
                 }
-                {!user? <><button 
+                {!user? 
+                <>
+                <button 
                     onClick={signInWithGoogle}
                     type="button">
                     <img width="15px" style={{ marginRight:"5px"}} alt="Google login" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" />
@@ -85,16 +93,27 @@ const Navbar = ({type}) => {
                  : 
                 <>
                 <div className="user-info">
+
+                <div className="dashboard" onClick={toggleMenu}>
+                    Menu<img style={{marginLeft:"2px", transform: openMenu === false ? "rotate(0deg)" : "rotate(180deg)"}} src="https://cdn-icons-png.flaticon.com/512/57/57055.png" alt="dropdown" width="10px" height="10px"/>
+                </div>
+                <div className="MenuContainer" style={{display: openMenu ? 'block' : 'none'}}>
+                    <Link className="item" to={`/dashboard/${user.uid}`}>Dashboard</Link>
+                        <hr style={{width:"70%", marginTop:"4px", marginBottom:"4px"}}/>
+                    <Link className="item" to={`/dashboard/${user.uid}`}>Profile</Link>
+               </div>
+                
+
                     {type !== "dashboard" ? 
                     <>
                     <Link className="dashboard"
-                    to={`/dashboard/${user.uid}`}>Dashboard</Link>
+                    to={`/create-post/${user.uid}`}>Create Post</Link>
                     </>
                     :
                     <>
                     <Link className="dashboard"
                      to={`/`}>Home</Link>
-                     </>
+                </>
                      }
                     
                    <div className="rekt">
@@ -105,6 +124,9 @@ const Navbar = ({type}) => {
                 </div>
                 </>
                 }
+               
+             
+                
             </div>
         </div>
      );

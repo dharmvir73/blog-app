@@ -10,7 +10,6 @@ import Lable from '../../components/Common/lable/Lable';
 import Navbar from '../../components/Common/navbar/Navbar'
 import "./Blog.css"
 
-
 const Blog = () => {
 
     const [user] = useAuthState(auth)
@@ -84,7 +83,7 @@ const Blog = () => {
     
     return ( 
         <div className="main">
-          <Navbar type="dashboard" />
+          <Navbar type="create-post" />
         <div className="blog-wrapper">
 
           {blog === undefined ? <><img className="Loading" src={Loading} alt="Loading..." height="100px" width="100px"/></> 

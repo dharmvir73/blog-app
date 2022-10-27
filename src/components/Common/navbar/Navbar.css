@@ -169,3 +169,35 @@ font-size: 0.8rem
 .picture img{
     border-radius: 20px;
 }
+
+.MenuContainer{
+    width: 125px;
+    height: 90px;
+    position: absolute;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    padding: 10px;
+    margin-left: -2%;
+    margin-bottom: -10rem;
+    border: 3px solid lightblue;
+    border-radius: 20px;
+    box-shadow: 3px 3px 10px black;
+    z-index: 1;
+}
+
+.item{
+    text-decoration: none;
+    color: black;
+    display:flex;
+    align-self: center;
+    font-size: .9em;
+    padding: 2px;
+    padding:5px;
+    cursor: pointer;
+    width: 80%;
+}
+
+.item:hover{
+    font-weight: bold;
+}
