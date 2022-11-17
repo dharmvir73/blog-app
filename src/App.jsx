@@ -5,6 +5,8 @@ import Blog from './pages/blog/Blog'
 import Login from './pages/admin/auth/Login'
 import CreatePost from './pages/admin/createpost/CreatePost';
 import Dashboard from './pages/dashboard/Dashboard'
+import UpdatePost from './components/Dashboard/updatePost/UpdatePost'
+import Profile from './pages/profile/Profile'
 import { Route, Routes } from 'react-router-dom';
 
 const App = () => {
@@ -16,6 +18,8 @@ const App = () => {
       <Route path="/login" element={<Login/>} />
       <Route path="/create-post/:id" element={<CreatePost />} />
       <Route path="/dashboard/:id" element={<Dashboard />} />
+      <Route path="/update-post/:id" element={<UpdatePost />} />
+      <Route path="/profile/:id" element={<Profile />} />
       </Routes>
     </div>
    );

@@ -21,15 +21,18 @@
 }
 
 .blog-text{
-    width: 52vw;
-    line-height: 1.7rem;
+    width: 64vw;
+    line-height: 2.5rem;
     font-family: 'Nunito', sans-serif;
+    font-weight: 700;
     color: #06283D;
     margin-bottom: 2rem;
+    font-size: 24px;
+    text-align: justify;
 }
 
 .Loading{
-    margin-top:25%;
+    margin-top:15%;
 }
 
 .top-wrapper{
@@ -42,12 +45,12 @@
 }
 
 .content-wrapper{
+    margin-top:0rem;
+    height:70%;
+    width:60%;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-gap: 2rem;
-    column-gap: 10vw;
-    color:antiquewhite;
-    margin-top: -3rem
+    color:rgb(255, 255, 255);
+    margin-bottom: 2rem
 }
 
 .content-wrapper span{
@@ -66,7 +69,6 @@
     box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
     border-radius: 1rem;
     padding: 2rem;
-
 }
 
 .comment-section{
@@ -74,7 +76,6 @@
     border: 2px solid #dadada;
     border-radius: 7px;
     margin-bottom: 1rem;
-
 }
 
 .comment-section:hover{
@@ -143,17 +144,45 @@
     overflow-y: auto;
 }
 
+.label-wrapper{
+    width:100%;
+    display:flex;
+    align-items:center;
+}
+
+.SavePost{
+    height:25px;
+    width:25px;
+    margin-right:0px;
+}
+
+
+
 @media(max-width: 475px){
     .Cover{
         height: 25vh;
     }
     .comment-wrapper{
         width: 95vw;
+        box-shadow:none;
+        
     }
     .create-comment{
         height: 14vh;
     }
     .comment-scroller{
         height:30vh;
+    }
+    .Loading{
+        margin-top:80%;
+    }
+    .content-wrapper{
+        width:85%
+    }
+    .blog-text{
+        font-size: 18px;
+        line-height: 1.8rem;
+        width: 80vw;
+        text-align:justify;
     }
 }

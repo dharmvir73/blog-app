@@ -2,19 +2,22 @@ import {useParams} from 'react-router'
 import {Link} from 'react-router-dom'
 import { useEffect, useState, useRef } from 'react';
 import { arrayUnion, doc, getDoc, Timestamp, updateDoc, onSnapshot} from "firebase/firestore";
-import Loading from "../../Images/Loding/Ripple.gif"
+import Loading from "../../Images/Loding/Pulse.gif"
 import { useAuthState } from 'react-firebase-hooks/auth';
 import {auth, db} from '../../backend/firebase-config'
 import { v4 } from "uuid";
 import Lable from '../../components/Common/lable/Lable';
 import Navbar from '../../components/Common/navbar/Navbar'
+import SavePost from '../../components/Blog/savepost/SavePost'
 import "./Blog.css"
 
 const Blog = () => {
 
     const [user] = useAuthState(auth)
-
+  
     const {id} = useParams();
+
+    const [url, setUrl] = useState()
 
     const [blogTitle, setBlogTitle] = useState("")
 
@@ -51,12 +54,13 @@ const Blog = () => {
           else {
             console.log("No such document")
           }
-
       }
 
     useEffect(()  =>  {
 
       setTimeout(() => {loadBlog();},1000)
+
+      setUrl(window.location.href)
       
     },[])
 
@@ -75,41 +79,56 @@ const Blog = () => {
         inputRef.current.value = ""
       )
     }
-
-  useEffect(()  =>  {
+    useEffect(()  =>  {
       onSnapshot(doc(db, "blogs-post", id), (doc) => {
       setComments(doc.data().comments)})
   },[])
-    
+
+ 
+
     return ( 
         <div className="main">
           <Navbar type="create-post" />
         <div className="blog-wrapper">
 
           {blog === undefined ? <><img className="Loading" src={Loading} alt="Loading..." height="100px" width="100px"/></> 
-          : 
-          <>
+          :
+          <>  
           <div className="top-wrapper">
           <div className="content-wrapper">
-          <span className="label">
-          <Lable lable={blogCat}/>
-          </span>  
+
+          <span className="label-wrapper">
+          <Lable className="label" lable={blogCat}/>
+          <div className="SavePost">
+          {user && <SavePost userId={user.uid} blogId={id} cover={blogCover} url={url}/>}
+          </div>
+          </span> 
+
           <span>
+          <h1 style={{fontSize: `${blogTitle.length>30  ? '1.5rem' : '2.5rem'}`, paddingBottom:'1rem'}}>{blogTitle.toLocaleUpperCase()}</h1>
           </span>
-          <span style={{width:"20vw"}}>
-          <h1 style={{fontSize: `${blogTitle.length>15 ? '1.5rem' : '2.5rem'}`}}>{blogTitle}</h1>
-          </span>
-         <span style={{width:"25vw", display:"flex", flexDirection:"column",}}>
-         <h4 style={{marginLeft:"5rem"}}>author : {blogAuthor}</h4>
-         <p style={{marginLeft:"5rem"}} className="Date">published date : {blogDate.toLowerCase()}</p>
-         </span>     
+
+         <span style={{display:"flex", flexDirection:"column", width:'100%'}}>
+            <p style={{marginRight:'0',fontSize:'0.8rem',marginBottom:'0.2rem'}}>Author : {blogAuthor}</p>
+            <p style={{marginRight:'0',fontSize:'0.8rem', opacity:'0.7'}} className="Date">Published Date : {blogDate.toLowerCase()}</p>
+         </span>   
+
           </div>
           </div>
           <img className="Cover" src={blogCover} alt="cover" height={window.innerHeight / 2 * 2} width={window.innerWidth / 2 * 1.5}/>
           <p className="blog-text">{blogText}</p>
           {
             user === null ? <>
-            <Link to={`/`}>Please Login To Comment</Link></> : <>
+            <Link 
+            style={{
+              textDecoration:'none',
+              padding:'1rem', 
+              backgroundColor:'#2192FF', 
+              borderRadius:'10px',
+              cursor:'pointer',
+              color:'#FFFF',
+              textAlign:'center'
+              }} to={`/`}>Please Login To Comment <img height="20px" width="20px" src="https://cdn-icons-png.flaticon.com/512/891/891399.png" alt="" /> </Link></> : <>
             <div className="comment-wrapper">
               <h3 style={{marginBottom:"1rem"}}>Comments</h3>
           <div className="comment-section">

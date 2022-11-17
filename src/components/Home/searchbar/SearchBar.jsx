@@ -1,6 +1,6 @@
 import "./SearchBar.css";
 
-const SearchBar = ({value, handleSearch, formSubmit}) => {
+const SearchBar = ({value, handleSearchKey, formSubmit}) => {
     return ( 
         <div className="searchBar-wrap">
             <form onSubmit={formSubmit}>
@@ -8,7 +8,7 @@ const SearchBar = ({value, handleSearch, formSubmit}) => {
                 type="text"
                 placeholder="Search"
                 value={value}
-                onChange={handleSearch}
+                onChange={handleSearchKey}
                 />
                 <button>GO</button>
             </form>

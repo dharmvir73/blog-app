@@ -70,6 +70,7 @@ const CreatePost = () => {
           comments:[],
           uid: user.uid,
           blogId: v4(),
+          views:0
           
         }
           ).then(() =>{
@@ -113,10 +114,10 @@ const CreatePost = () => {
                 </div>
                 <div className="input-container">
                 <div className="input-title">select category</div>
-                <select  type="text" className="input-primary" placeholder="" onChange={(e)=> {setNewCategory(e.target.value)}}>
+                <select  type="text" className="input-primary" placeholder="" onChange={(e)=> {setNewCategory(e.target.value)}}>   
                   <option>Technology</option>
                   <option>Fashion</option>
-                  <option>Programming</option>
+                  <option>Programing</option>
                   <option>Health</option>
                   <option>Finance</option>
                   <option>Sports</option>
