@@ -64,7 +64,7 @@ const Home = () => {
         <div>
             {/* Navbar  */}
 
-            <Navbar />
+            <Navbar type="Home"/>
 
             {/*page header*/}
 

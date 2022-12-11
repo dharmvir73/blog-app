@@ -22,8 +22,6 @@ const Navbar = ({type}) => {
         }).catch((error) => {console.log(error)})
     }
 
-  
-
     const userCollection = async (user) => {
 
         const docRef = doc(db, "user-details", user.uid)
@@ -40,11 +38,12 @@ const Navbar = ({type}) => {
                 username: user.displayName,
                 email: user.email,
                 image: user.photoURL,
+                follower: arrayUnion(),
+                following: arrayUnion(),
             })
         }else{
             return;
         }
-           
     }
 
     const LogOut = () => {
@@ -68,19 +67,65 @@ const Navbar = ({type}) => {
 
     return ( 
         <div className="navbar-wrapper">
+
+            {/* Logo Section */}
             <div className="left">
+                <Link to={`/`}>
                 <img src={Logo} alt="Logo" className="logo"/>
+                </Link>
             </div>
+
+            {/* Menu  */}
+            <div className="center">
+
+            <div className="menu-wrapper">
+                {user && <>
+                <Link style={{textDecoration: "none", color:type === "Home" ? "#0077b6" : "black"}} to={`/`}>
+                    <div className="menu-item" style={{border: type === "Home" ? "2px solid #0077b6" : "none" ,borderRadius: "10px"  }}>
+                    <span>
+                    {type === "Home" ? <img src="https://cdn-user-icons.flaticon.com/84735/84735802/1668687773294.svg?token=exp=1668688620~hmac=7b570890678ab47cae9ae9a562e36201" alt="home" height="18px" width="18px"/>
+                    :
+                    <img src="https://cdn-icons-png.flaticon.com/512/263/263115.png" alt="home" height="18px" width="18px"/>}
+                    </span> 
+                    <span>Home</span>
+                </div>
+                </Link>
+                
+                <Link style={{textDecoration: "none", color:type === "profile" ? "#0077b6" : "black"}} to={`/profile/${user.uid}`}>
+                <div className="menu-item" style={{border: type === "profile" ? "2px solid #0077b6" : "none" ,borderRadius: "10px"  }}>
+                <span><img src="https://cdn-icons-png.flaticon.com/512/263/263058.png" alt="home" height="18px" width="18px"/></span>
+                <span>Profile</span>
+                </div>
+                </Link>
+
+                <Link style={{textDecoration: "none", color:type === "dashboard" ? "#0077b6" : "black"}} to={`/dashboard/${user.uid}`}>
+                <div className="menu-item" style={{border: type === "dashboard" ? "2px solid #0077b6" : "none" ,borderRadius: "10px", width:"100px"}}>
+                <span><img src="https://cdn-icons-png.flaticon.com/512/263/263082.png" alt="home" height="18px" width="18px"/></span>
+                <span>Dashboard</span>
+                </div>
+                </Link>
+
+                <Link style={{textDecoration: "none", color:type === "createPost" ? "#0077b6" : "black"}} to={`/create-post/${user.uid}`}>
+                <div className="menu-item" style={{border: type === "createPost" ? "2px solid #0077b6" : "none" ,borderRadius: "10px", width:"110px" }}>
+                <span><img src="https://cdn-icons-png.flaticon.com/512/263/263062.png" alt="home" height="18px" width="18px"/></span>
+                <span>Create Post</span>
+                </div>
+                </Link>
+                </>}
+            </div>
+            </div>
+
+            {/* login/logout section user information details */}
+
             <div className="right">
                     {
                     open === false ? 
                     <>
-                     <img onClick={handleMenu} className="burger-menu" src={Burger} alt=""/>
+                    <img onClick={handleMenu} className="burger-menu" src={Burger} alt=""/>
                     </> 
                     : 
-                    <>
-                                
-                     <div className="menu-container" style={{display:"flex",flexDirection:"column",position:"absolute",height: "100vh" ,width:"100vw",backgroundColor:"#5a5a5a",  touchAction: "none",}}>
+                    <>       
+                    <div className="menu-container" >
                         <div className="close-btn" onClick={handleMenu}>X</div>
                         <div className="profile-wrapper">
                             <div className="user-picture">
@@ -97,11 +142,29 @@ const Navbar = ({type}) => {
                         <NavItems />
                         
                         <div style={{width:"100vw",padding:"30px 20px", color:"white"}}><img src="https://cdn-icons-png.flaticon.com/512/1828/1828490.png" alt="" width="20px"/>Logout</div>
+
                     </div>
-                 
                     </>
                 }
-                {!user? 
+
+                {!user?   
+                    <>
+                    <button className="SignIn"
+                    onClick={signInWithGoogle}
+                    type="button">
+                    <img className="GoogleLogo" width="15px" style={{ marginRight:"5px"}} alt="GoogleLogo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" />
+                        Sign In with Google
+                    </button>
+                    </>   
+                     : 
+                    <>
+                    <div className="user-login-info">                 
+                    <img className="user-image" src={user.photoURL} alt="" height='32px' width='32px'/>
+                    <Link className="logout-btn" style={{textDecoration:"none", color:"black", border: "2px solid black", padding:"8px 16px", borderRadius: "10px"}} onClick={LogOut} to={`/`}>logout</Link>
+                    </div>
+                    </>}
+               
+                {/*!user?   
                 <>
                 <button className="SignOut"
                     onClick={signInWithGoogle}
@@ -113,29 +176,6 @@ const Navbar = ({type}) => {
                  : 
                 <>
                 <div className="user-info">
-
-                <div className="dashboard" onClick={toggleMenu}>
-                    Menu<img style={{marginLeft:"2px", transform: openMenu === false ? "rotate(0deg)" : "rotate(180deg)"}} src="https://cdn-icons-png.flaticon.com/512/57/57055.png" alt="dropdown" width="10px" height="10px"/>
-                </div>
-                <div className="MenuContainer" style={{display: openMenu ? 'block' : 'none', backgroundColor:'#fff'}}>
-                    <Link className="item" to={`/dashboard/${user.uid}`}>Dashboard</Link>
-                        <hr style={{width:"70%", marginTop:"4px", marginBottom:"4px"}}/>
-                    <Link className="item" to={`/profile/${user.uid}`}>Profile</Link>
-               </div>
-                
-
-                    {type !== "dashboard" ? 
-                    <>
-                    <Link className="dashboard"
-                    to={`/create-post/${user.uid}`}>Create Post</Link>
-                    </>
-                    :
-                    <>
-                    <Link className="dashboard"
-                     to={`/`}>Home</Link>
-                </>
-                     }
-                    
                    <div className="rekt">
                    <p>{user.displayName.split(" ")[0]}</p> 
                     <img src={user.photoURL} alt=""  height='30px' width='30px'/>
@@ -143,7 +183,7 @@ const Navbar = ({type}) => {
                     <Link className="SignOut" onClick={LogOut} to={`/`}>Sign Out</Link>
                 </div>
                 </>
-                }
+            */}
 
             </div>
         </div>

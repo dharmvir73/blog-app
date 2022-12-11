@@ -52,15 +52,17 @@ const Dashboard = () => {
     },[])
 
     return (
+        <div>
+            <Navbar type="dashboard"/>
         <div className="Wrapper">
-             <Navbar />
-
+             
              {!isLoading && item.length > 0 && <Dashboarditem Items={item} />}
 
              {isLoading && <img src={spinner} alt="Loading" height="80px" width="80px" style={{marginTop: "20%" , marginLeft: "50%", transform: "translate(-50%, -50%)"}} />}
 
              {!isLoading && item.length === 0 && <p style={{textAlign: 'center', marginTop:'15rem', fontWeight:'bold', fontSize:'1.5rem'}}>Blogs Not Found</p>}
              
+        </div>
         </div>
      );
 }

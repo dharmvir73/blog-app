@@ -1,42 +1,79 @@
-
 .navbar-wrapper{
-    height : 100px;
+    height : 80px;
     display:flex;
     align-items: center;
     justify-content: space-between;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
+    background-color: white !important;
+    width: 100% !important;
 }
 
 .right{
-    margin-right: 0;
+    height:100%;
+    width:20%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
+.center{
+    width:60%;
+    height:100%;
+}
+
+.menu-wrapper{
+    display: flex;
+    align-items:center;
+    justify-content: center;
+    height: 100%;
+    width: 80%;
+    font-size: 0.9rem;
+    font-weight: bold;
+ }
+ .menu-item{
+    display: flex;
+    align-items: center;
+    justify-content: center;    
+    width: 75px;
+    height: 40px;
+    cursor: pointer;
+ }
+ .menu-item:hover{
+    color:#0077b6;
+ }
+
 .left{
-    margin-left:0;
+    height:100%;
+    width:20%;
+    display: flex;
+    align-items: center;
 }
 
 .burger-menu{
     display:none;
 }
 
-.SignOut{
+.SignIn{
     display:flex;
     outline: none;
     height: fit-content;
-    margin-right: 8vw;
-    padding: 11px 20px;
-    border: 3px solid grey;
+    padding: 8px 16px;
     background-color: white;
-    border-radius: 18px;
     cursor: pointer;
     font-size: 0.8rem;
     font-weight: bolder;
     text-decoration: none;
+    border: none;
     color:black;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 }
 
-.SignOut:hover{
+.SignIn:hover{
     background-color: lightgrey;
-    
+}
+
+.logout-btn:hover{
+    background-color: lightgrey;
 }
 
 .user-info{
@@ -45,9 +82,10 @@
 }
 
 .user-info p{
-margin-right: 0.5rem;
-font-size: 0.8rem
+    margin-right: 0.5rem;
+    font-size: 0.8rem
 }
+
 .user-info img{
     border-radius: 50px;
     background-size: auto;
@@ -86,12 +124,18 @@ font-size: 0.8rem
 }
 
 .logo{
-    width: 150px;
-    margin-left: 8vw;
+    width: 120px;
 }
+
 .menu-container{
+    margin-top: 100vh;
     margin-left: -100%;
-    margin-top: -30px;
+    height:110vh;
+    width:100vw;
+    display: flex;
+    flex-direction: column;
+    background-color:#5a5a5a;
+    touch-action: none;
     z-index: 1;
     overflow:hidden;
     animation-name: load;
@@ -109,10 +153,9 @@ font-size: 0.8rem
 }
 
 @media(max-width:475px){
-
     .logo{
-        width: 90px;
-        margin-top: 5px;
+        width: 80px;
+        margin-left: 10%;
     }
     .dashboard{
        display:none;
@@ -135,9 +178,9 @@ font-size: 0.8rem
     }
     .burger-menu{
         display: inline;
-        width:30px;
-        margin-right: 8vw;
+        width: 28px;
         cursor: pointer;
+        margin-right: 10%;
     }
     .navbar-wrapper{
         height:50px;
@@ -145,12 +188,50 @@ font-size: 0.8rem
     .SignOut{
         display:none;
     }
+    .center{
+        display:none;
+    }
+    .right{
+        width:50%;
+    }
+    .left{
+        width:50%;
+    }
+    .user-login-info{
+        display:none;
+    }
+    .user-image{
+        display:none;
+    }
+    .logout-btn{
+        display:none;
+    }
+    .SignIn{
+        display:none;
+    }
+    .GoogleLogo{
+        display:none;
+    }
+}
+.user-login-info{
+    width:60%;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bolder;
+    font-size: 0.9rem;
+    text-transform: lowercase;
+    cursor: pointer;
+}
+.user-image{
+    border-radius: 50%;
 }
 
 .close-btn{
+    margin-top: 1rem;
     font-size:2rem;
     padding:1rem;
-    margin-right:0px;
+    margin-right:2%;
     color:white;
 }
 

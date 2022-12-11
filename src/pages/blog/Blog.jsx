@@ -9,6 +9,7 @@ import { v4 } from "uuid";
 import Lable from '../../components/Common/lable/Lable';
 import Navbar from '../../components/Common/navbar/Navbar'
 import SavePost from '../../components/Blog/savepost/SavePost'
+import Follow from '../../components/Blog/follow/Follow'
 import "./Blog.css"
 
 const Blog = () => {
@@ -37,6 +38,8 @@ const Blog = () => {
 
     const [comments, setComments] = useState([])
 
+    const [authorId, setAuthorId] = useState()
+
     const blogRef = doc(db, 'blogs-post', id);
 
     const loadBlog = async () => {
@@ -50,6 +53,7 @@ const Blog = () => {
             setBlogCat(blog.data().category)
             setBlogText(blog.data().text)
             setComments(blog.data().comments)
+            setAuthorId(blog.data().uid)
           }
           else {
             console.log("No such document")
@@ -84,7 +88,12 @@ const Blog = () => {
       setComments(doc.data().comments)})
   },[])
 
- 
+ function showHtml(){
+  let body = blogText
+  return (
+    <div dangerouslySetInnerHTML={{__html: body}}></div>
+  )
+ }
 
     return ( 
         <div className="main">
@@ -104,19 +113,22 @@ const Blog = () => {
           </div>
           </span> 
 
-          <span>
+          <span> 
           <h1 style={{fontSize: `${blogTitle.length>30  ? '1.5rem' : '2.5rem'}`, paddingBottom:'1rem'}}>{blogTitle.toLocaleUpperCase()}</h1>
           </span>
 
          <span style={{display:"flex", flexDirection:"column", width:'100%'}}>
             <p style={{marginRight:'0',fontSize:'0.8rem',marginBottom:'0.2rem'}}>Author : {blogAuthor}</p>
+            <div style={{width:'inherit',height:'32px', display:'flex'}}>
+            {user && <Follow user={user.uid} author={authorId}/>}
             <p style={{marginRight:'0',fontSize:'0.8rem', opacity:'0.7'}} className="Date">Published Date : {blogDate.toLowerCase()}</p>
+            </div>
          </span>   
 
           </div>
           </div>
           <img className="Cover" src={blogCover} alt="cover" height={window.innerHeight / 2 * 2} width={window.innerWidth / 2 * 1.5}/>
-          <p className="blog-text">{blogText}</p>
+          <div className="blog-text">{showHtml()}</div>
           {
             user === null ? <>
             <Link 
@@ -127,7 +139,9 @@ const Blog = () => {
               borderRadius:'10px',
               cursor:'pointer',
               color:'#FFFF',
-              textAlign:'center'
+              textAlign:'center',
+              marginBottom: "40px",
+              boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px"
               }} to={`/`}>Please Login To Comment <img height="20px" width="20px" src="https://cdn-icons-png.flaticon.com/512/891/891399.png" alt="" /> </Link></> : <>
             <div className="comment-wrapper">
               <h3 style={{marginBottom:"1rem"}}>Comments</h3>

@@ -14,15 +14,29 @@ const Profile = () => {
 
     const [name, setName] = useState(" ")
 
+    const [following, setFollowing] = useState(0)
+
+    const [follower, setFollower] = useState(0)
+
     const [profilePicture, setProfilePicture] = useState(" ")
 
     const getUserInfo = async () => {
+
+        let followings = []
+
+        let followers = []
 
         try{
             const user = await getDoc(docRef)
 
             setName(user.data().username)
             setProfilePicture(user.data().image)
+
+            followings = user.data().following
+            setFollowing(followings.length)
+
+            followers = user.data().follower
+            setFollower(followers.length)
       
         }catch(err){
             console.log(err)
@@ -42,8 +56,6 @@ const Profile = () => {
         setActiveSwitch(false)
     }
 
-     
-
     const [saveData ,setSaveData] = useState([])
 
     const Ref = doc(db, 'user-details', id)
@@ -60,14 +72,14 @@ const Profile = () => {
 
         temp = [...arr]
 
+      
+
         setSaveData([...temp])
     }
 
-    const PostRef = doc(db, 'blogs-post', id)
-
     const [post, setPost] = useState([])
 
-    const GetUserPost = async () =>{
+    const GetUserPost = async () => {
 
         let arr = []
        
@@ -85,22 +97,26 @@ const Profile = () => {
 
     }
 
+  
+
     useEffect(()  =>  {
         GetSavedData()
         GetUserPost()
+       
     },[])
 
-    return ( 
-    <div className="Wrapper">
-        <Navbar />
-        <div className="ProfileWrapper">
+    return (
+        <div>
+            <Navbar type="profile" />
+        <div className="Wrapper">
+                <div className="ProfileWrapper">
             <div className="left-side"><img src={profilePicture} alt="" height="150px" width="150px" style={{borderRadius:"50%"}}/></div>
             <div className="right-side">           
                 <div className="user_name">{ name }</div>
                 <div className="profile-info">
                     <div className=""><span style={{fontWeight:"bold"}}> {post.length} </span>post</div>
-                    <div className=""><span style={{fontWeight:"bold"}}> 218 </span> followers</div>
-                    <div className=""><span style={{fontWeight:"bold"}}> 77 </span> following</div>
+                    <div className=""><span style={{fontWeight:"bold"}}> {follower} </span> followers</div>
+                    <div className=""><span style={{fontWeight:"bold"}}> {following} </span> following</div>
                 </div>  
             </div>
         </div>
@@ -113,6 +129,7 @@ const Profile = () => {
         {activeSwitch === true ? <> <Blogs id={id} /> </> : null}
         {activeSwitch === false ? <> <SavedPosts data={saveData} /> </> : null}
     </div> 
+    </div>
     );
 }
  
