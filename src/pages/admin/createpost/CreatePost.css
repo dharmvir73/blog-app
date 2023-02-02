@@ -22,9 +22,9 @@ form{
 .input-primary{
     height: 48px;
     width: 512px;
-    background-color: #D9D9D9;
+    background-color: #ffffff;
     outline: none;
-    border: none;
+    border: 1px solid gray;
     padding-left:20px;
     padding-right:20px;
 }

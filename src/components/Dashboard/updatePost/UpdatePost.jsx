@@ -80,7 +80,7 @@ const UpdatePost = () => {
       <Navbar type="dashboard" />
           {popup ?
             <div className="create-screen-popup" style={{marginTop: window.innerHeight/1.5}}>
-              <div>post uploaded successfully</div>
+              <div>post updated successfully</div>
               <button onClick={handlePopup}>Done</button>
             </div>
             :
@@ -162,7 +162,7 @@ const UpdatePost = () => {
         </div>
       </form>
       <div className="postUpload-wrapper">
-        <button className="postUpload-button" >clear</button>
+        <button className="postUpload-button">Clear</button>
         <button className="postUpload-button" onClick={handleUpdate}>Update</button>
       </div>
     </div>
