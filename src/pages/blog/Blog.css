@@ -152,15 +152,21 @@
   .Cover {
     height: 25vh;
   }
+  .comments {
+    padding: 20px 0px;
+  }
   .comment-wrapper {
     width: 95vw;
     box-shadow: none;
+    flex-direction: column;
+    margin-bottom: 0px;
   }
   .create-comment {
     height: 14vh;
   }
   .comment-scroller {
-    height: 30vh;
+    margin-top: 2rem;
+    height: 40vh;
   }
   .Loading {
     margin-top: 80%;

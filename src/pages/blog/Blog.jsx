@@ -191,15 +191,16 @@ const Blog = () => {
             <div className="blog-text">{showHtml()}</div>
 
             <div className="comment-wrapper">
-              <h3 style={{ marginBottom: "1rem" }}>Comments</h3>
+              <h3 style={{ marginBottom: "2rem", marginLeft: "0px" }}>
+                Comments
+              </h3>
 
               {!user ? (
                 <div
                   style={{
-                    marginLeft: "50%",
-                    transform: "translate(-30%,  0%)",
-                    marginTop: "5%",
-                    marginBottom: "5%",
+                    marginBottom: "2rem",
+                    width: "100%",
+                    display: "flex",
                   }}
                 >
                   <Link

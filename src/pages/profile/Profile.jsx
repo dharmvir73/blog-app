@@ -120,15 +120,16 @@ const Profile = () => {
             <div className="user_name">{name}</div>
             <div className="profile-info">
               <div className="">
-                <span style={{ fontWeight: "bold" }}> {post.length} </span>post
+                <span style={{ fontWeight: "bold" }}> {post.length} </span>
+                <span>post</span>
               </div>
               <div className="">
                 <span style={{ fontWeight: "bold" }}> {follower} </span>{" "}
-                followers
+                <span>followers</span>
               </div>
               <div className="">
-                <span style={{ fontWeight: "bold" }}> {following} </span>{" "}
-                following
+                <span style={{ fontWeight: "bold" }}> {following} </span>
+                <span>following</span>
               </div>
             </div>
           </div>

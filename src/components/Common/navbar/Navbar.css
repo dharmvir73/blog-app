@@ -256,10 +256,10 @@
 .close-btn {
   margin-top: 2.5rem;
   font-size: 2rem;
-  padding: 1rem;
+  padding-top: 1rem;
+  padding-right: 1rem;
   margin-right: 2%;
   color: white;
-  margin-bottom: 2rem;
 }
 
 .profile-wrapper {
