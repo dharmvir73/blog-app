@@ -24,13 +24,13 @@ import { getStorage } from "@firebase/storage";
 import { getAuth } from "@firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAo_CO-8tzcH0qKzFgt5iA23CJH5jMngAs",
-  authDomain: "bitblogs.firebaseapp.com",
-  projectId: "bitblogs",
-  storageBucket: "bitblogs.appspot.com",
-  messagingSenderId: "718071456589",
-  appId: "1:718071456589:web:b7d2da3da2932c3e3a8d04",
-  measurementId: "G-9393G4T8V8",
+  apiKey: "AIzaSyCCKoBU-FtKfTbd1T59wFVcN6MA67mipGg",
+  authDomain: "bitblogs-62423.firebaseapp.com",
+  projectId: "bitblogs-62423",
+  storageBucket: "bitblogs-62423.appspot.com",
+  messagingSenderId: "880138135475",
+  appId: "1:880138135475:web:b9ba1c041543622a874dc6",
+  measurementId: "G-WKZNVMLCF6",
 };
 
 const app = initializeApp(firebaseConfig);

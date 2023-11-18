@@ -50,6 +50,7 @@ const Navbar = ({ type }) => {
         image: user.photoURL,
         follower: arrayUnion(),
         following: arrayUnion(),
+        role:"user"
       });
     } else {
       return;
