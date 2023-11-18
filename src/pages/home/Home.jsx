@@ -21,18 +21,21 @@ const Home = () => {
   };
 
   useEffect(() => {
-    if (!searchKey) {
-      getBlogPost();
-    }
-  }, [searchKey]);
+    getBlogPost();
+  }, []);
 
   const handleSearchSubmit = async (e) => {
     e.preventDefault();
+
     const blogsInstance = await getDocs(blogPostCollectionRef);
     const blogs = blogsInstance.docs.map((doc) => ({
       ...doc.data(),
       id: doc.id,
     }));
+    if (!searchKey) {
+      setBlogPost(blogs);
+      return;
+    }
     const filteredBlogs = blogs.filter((blog) =>
       blog?.title
         ?.trim()
