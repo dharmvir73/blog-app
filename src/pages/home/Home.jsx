@@ -2,9 +2,9 @@ import BlogList from "../../components/Home/bloglist/BlogList";
 import Header from "../../components/Home/header/Header";
 import SearchBar from "../../components/Home/searchbar/SearchBar";
 import Navbar from "../../components/Common/navbar/Navbar";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { db } from "../../backend/firebase-config";
-import { collection, getDocs, query, where } from "firebase/firestore";
+import { collection, doc, getDocs, query, where } from "firebase/firestore";
 import spinner from "../../Images/Loding/Spinner.gif";
 import "./Home.css";
 
@@ -17,30 +17,29 @@ const Home = () => {
 
   const blogPostCollectionRef = collection(db, "blogs-post");
 
-  const getBlogPost = async () => {
+  const getBlogPost = useCallback(async () => {
     const data = await getDocs(blogPostCollectionRef);
-
     setBlogPost(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-  };
+  }, [blogPostCollectionRef]);
 
   useEffect(() => {
-    getBlogPost();
-  }, []);
+    if (!searchKey) {
+      getBlogPost();
+    }
+  }, [searchKey, getBlogPost]);
 
   const handleSearchSubmit = async (e) => {
     e.preventDefault();
+    const blogsInstance = await getDocs(blogPostCollectionRef);
+    const blogs = blogsInstance.docs.map((doc) => ({
+      ...doc.data(),
+      id: doc.id,
+    }));
 
-    const condition = where("category", "==", searchKey);
-
-    const q = query(collection(db, "blogs-post"), condition);
-
-    const querySnapshot = await getDocs(q);
-
-    querySnapshot.forEach((doc) => {
-      searchResults.push({ ...doc.data(), id: doc.id });
-
-      setBlogPost(searchResults);
-    });
+    const filteredBlogs = blogs.filter((blog) =>
+      blog.title.trim().toLowerCase().includes(searchKey.trim().toLowerCase())
+    );
+    setBlogPost(filteredBlogs);
   };
 
   const Loader = () => {
