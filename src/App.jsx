@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./App.css";
 import Home from "./pages/home/Home";
 import Blog from "./pages/blog/Blog";
@@ -9,6 +9,8 @@ import UpdatePost from "./components/Dashboard/updatePost/UpdatePost";
 import Profile from "./pages/profile/Profile";
 import { Route, Routes } from "react-router-dom";
 import UserAdmin from "./pages/user-admin/user-admin";
+import UserBlogs from "./pages/user-admin/user-blogs/UserBlogs";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 const App = () => {
   return (
@@ -22,6 +24,7 @@ const App = () => {
         <Route path="/update-post/:id" element={<UpdatePost />} />
         <Route path="/profile/:id" element={<Profile />} />
         <Route path="/admin" element={<UserAdmin />} />
+        <Route path="/admin/user-blogs/:id" element={<UserBlogs />} />
       </Routes>
     </div>
   );

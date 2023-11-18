@@ -15,12 +15,12 @@ import {
 import { Link } from "react-router-dom";
 import Logo from "../../../Images/Logo.png";
 import Burger from "../../../Images/menu.png";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import NavItems from "./MobileNavItems/NavItems";
 
 const Navbar = ({ type }) => {
   const [user] = useAuthState(auth);
-
+  const [currentUser, setCurrentUser] = useState("");
   const provider = new GoogleAuthProvider();
 
   const signInWithGoogle = async () => {
@@ -38,10 +38,6 @@ const Navbar = ({ type }) => {
 
     const docSnap = await getDoc(docRef);
 
-    console.log(docSnap.data());
-
-    console.log(user.uid);
-
     if (docSnap.data() === undefined) {
       await setDoc(doc(db, "/user-details/" + user.uid), {
         uid: user.uid,
@@ -50,7 +46,7 @@ const Navbar = ({ type }) => {
         image: user.photoURL,
         follower: arrayUnion(),
         following: arrayUnion(),
-        role:"user"
+        role: "user",
       });
     } else {
       return;
@@ -75,6 +71,16 @@ const Navbar = ({ type }) => {
     setOpenMenu(!openMenu);
   };
 
+  useEffect(() => {
+    const fetchCurrentUser = async () => {
+      const docRef = doc(db, "user-details", user?.uid);
+      const docSnap = await getDoc(docRef);
+      setCurrentUser(docSnap.data());
+    };
+    if (user) {
+      fetchCurrentUser();
+    }
+  }, [user?.uid, user]);
   return (
     <div className="navbar-wrapper">
       {/* Logo Section */}
@@ -195,33 +201,34 @@ const Navbar = ({ type }) => {
                   <span>Create Post</span>
                 </div>
               </Link>
-
-              <Link
-                style={{
-                  textDecoration: "none",
-                  color: type === "profile" ? "#0077b6" : "black",
-                }}
-                to={`/admin`}
-              >
-                <div
-                  className="menu-item"
-                  style={{
-                    border: type === "profile" ? "3px solid #0077b6" : "none",
-                    borderRadius: "12px",
-                  }}
-                >
-                  <span>
-                    <img
-                      src="/assets/administration.png"
-                      alt="home"
-                      height="18px"
-                      width="18px"
-                    />
-                  </span>
-                  <span>Admin</span>
-                </div>
-              </Link>
             </>
+          )}
+          {currentUser.role === "admin" && (
+            <Link
+              style={{
+                textDecoration: "none",
+                color: type === "profile" ? "#0077b6" : "black",
+              }}
+              to={`/admin`}
+            >
+              <div
+                className="menu-item"
+                style={{
+                  border: type === "useradmin" ? "3px solid #0077b6" : "none",
+                  borderRadius: "12px",
+                }}
+              >
+                <span>
+                  <img
+                    src="/assets/administration.png"
+                    alt="home"
+                    height="18px"
+                    width="18px"
+                  />
+                </span>
+                <span>Admin</span>
+              </div>
+            </Link>
           )}
         </div>
       </div>

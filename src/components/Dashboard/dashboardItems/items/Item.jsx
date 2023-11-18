@@ -4,7 +4,7 @@ import { doc, deleteDoc } from "firebase/firestore";
 import { Link } from "react-router-dom";
 
 const Item = ({ Items: { data, id } }) => {
-  const cover = data.cover;
+  const cover = data?.cover;
 
   const handleRemove = async () => {
     await deleteDoc(doc(db, "blogs-post", id));
