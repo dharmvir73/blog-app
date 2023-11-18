@@ -194,6 +194,32 @@ const Navbar = ({ type }) => {
                   <span>Create Post</span>
                 </div>
               </Link>
+
+              <Link
+                style={{
+                  textDecoration: "none",
+                  color: type === "profile" ? "#0077b6" : "black",
+                }}
+                to={`/admin`}
+              >
+                <div
+                  className="menu-item"
+                  style={{
+                    border: type === "profile" ? "3px solid #0077b6" : "none",
+                    borderRadius: "12px",
+                  }}
+                >
+                  <span>
+                    <img
+                      src="/assets/administration.png"
+                      alt="home"
+                      height="18px"
+                      width="18px"
+                    />
+                  </span>
+                  <span>Admin</span>
+                </div>
+              </Link>
             </>
           )}
         </div>

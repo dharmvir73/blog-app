@@ -2,7 +2,7 @@ import BlogList from "../../components/Home/bloglist/BlogList";
 import Header from "../../components/Home/header/Header";
 import SearchBar from "../../components/Home/searchbar/SearchBar";
 import Navbar from "../../components/Common/navbar/Navbar";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import { db } from "../../backend/firebase-config";
 import { collection, doc, getDocs, query, where } from "firebase/firestore";
 import spinner from "../../Images/Loding/Spinner.gif";
@@ -15,16 +15,16 @@ const Home = () => {
 
   const blogPostCollectionRef = collection(db, "blogs-post");
 
-  const getBlogPost = useCallback(async () => {
+  const getBlogPost = async () => {
     const data = await getDocs(blogPostCollectionRef);
     setBlogPost(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-  }, [blogPostCollectionRef]);
+  };
 
   useEffect(() => {
     if (!searchKey) {
       getBlogPost();
     }
-  }, [searchKey, getBlogPost]);
+  }, [searchKey]);
 
   const handleSearchSubmit = async (e) => {
     e.preventDefault();
