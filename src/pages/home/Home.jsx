@@ -9,8 +9,6 @@ import spinner from "../../Images/Loding/Spinner.gif";
 import "./Home.css";
 
 const Home = () => {
-  let searchResults = [];
-
   const [blogPost, setBlogPost] = useState([]);
 
   const [searchKey, setSearchKey] = useState("");
@@ -35,9 +33,11 @@ const Home = () => {
       ...doc.data(),
       id: doc.id,
     }));
-
     const filteredBlogs = blogs.filter((blog) =>
-      blog.title.trim().toLowerCase().includes(searchKey.trim().toLowerCase())
+      blog?.title
+        ?.trim()
+        ?.toLowerCase()
+        .includes(searchKey?.trim()?.toLowerCase())
     );
     setBlogPost(filteredBlogs);
   };

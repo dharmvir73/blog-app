@@ -134,12 +134,12 @@ const Blog = () => {
                   <h1
                     style={{
                       fontSize: `${
-                        blogTitle.length > 30 ? "1.5rem" : "2.5rem"
+                        blogTitle?.length > 30 ? "1.5rem" : "2.5rem"
                       }`,
                       paddingBottom: "1rem",
                     }}
                   >
-                    {blogTitle.toLocaleUpperCase()}
+                    {blogTitle?.toLocaleUpperCase()}
                   </h1>
                 </span>
 
@@ -175,7 +175,7 @@ const Blog = () => {
                       }}
                       className="Date"
                     >
-                      Published Date : {blogDate.toLowerCase()}
+                      Published Date : {blogDate?.toLowerCase()}
                     </p>
                   </div>
                 </span>
@@ -242,7 +242,7 @@ const Blog = () => {
                 </div>
               )}
               <div className="comment-scroller">
-                {comments.length === 0 ? (
+                {comments?.length === 0 ? (
                   <div
                     style={{
                       fontSize: "16px",
@@ -255,38 +255,39 @@ const Blog = () => {
                   </div>
                 ) : (
                   <>
-                    {comments
-                      .map((comments) => (
-                        <div className="comments" key={comments.commentId}>
-                          <div className="comment-title">
-                            <img
-                              src={comments.userPic}
-                              width="30px"
-                              height="30px"
-                              alt=""
-                              style={{ borderRadius: "50%" }}
-                            />
-                            <div
-                              style={{
-                                marginLeft: "40px",
-                                marginTop: "-27px",
-                                fontSize: "0.9rem",
-                                fontFamily: "'Nunito', sans-serif",
-                              }}
-                            >
-                              {comments.userName}
+                    {comments &&
+                      comments
+                        .map((comments) => (
+                          <div className="comments" key={comments.commentId}>
+                            <div className="comment-title">
+                              <img
+                                src={comments.userPic}
+                                width="30px"
+                                height="30px"
+                                alt=""
+                                style={{ borderRadius: "50%" }}
+                              />
+                              <div
+                                style={{
+                                  marginLeft: "40px",
+                                  marginTop: "-27px",
+                                  fontSize: "0.9rem",
+                                  fontFamily: "'Nunito', sans-serif",
+                                }}
+                              >
+                                {comments.userName}
+                              </div>
                             </div>
+                            <p className="comment-text">{comments.comment}</p>
+                            <p
+                              style={{ marginTop: "10px", fontSize: "0.7rem" }}
+                              className="comment-text"
+                            >
+                              {comments?.createdAt?.toDate()?.toDateString()}
+                            </p>
                           </div>
-                          <p className="comment-text">{comments.comment}</p>
-                          <p
-                            style={{ marginTop: "10px", fontSize: "0.7rem" }}
-                            className="comment-text"
-                          >
-                            {comments.createdAt.toDate().toDateString()}
-                          </p>
-                        </div>
-                      ))
-                      .reverse()}
+                        ))
+                        .reverse()}
                   </>
                 )}
               </div>
